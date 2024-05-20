@@ -21,9 +21,8 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(_selectedItem == 0
-            ? 'Gemini Chat'
-            : _sections[_selectedItem].title),
+        title: Text(
+            _selectedItem == 0 ? 'Ge-Bilgi' : _sections[_selectedItem].title),
       ),
       body: IndexedStack(
         index: _selectedItem,
