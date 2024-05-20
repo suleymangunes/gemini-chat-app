@@ -2,8 +2,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:gemini_chat_app/widgets/chat_input_box.dart';
-import 'package:gemini_chat_app/widgets/item_image_view.dart';
+import 'package:gemini_chat_app/core/widgets/chat_input_box.dart';
+import 'package:gemini_chat_app/core/widgets/item_image_view.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 
@@ -38,7 +38,8 @@ class _SectionTextInputStreamState extends State<SectionTextStreamInput> {
       children: [
         if (searchedText != null)
           MaterialButton(
-              color: Colors.blue.shade700,
+              // color: Colors.blue.shade700,
+              color: Theme.of(context).colorScheme.primaryContainer,
               onPressed: () {
                 setState(() {
                   searchedText = null;
@@ -102,16 +103,12 @@ class _SectionTextInputStreamState extends State<SectionTextStreamInput> {
           },
           onSend: () {
             if (controller.text.isNotEmpty) {
-              print('request');
-
               searchedText = controller.text;
               controller.clear();
               gemini
                   .streamGenerateContent(searchedText!, images: images)
                   .handleError((e) {
-                if (e is GeminiException) {
-                  print(e);
-                }
+                if (e is GeminiException) {}
               }).listen((value) {
                 setState(() {
                   images = null;
